@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="E:\MyViews\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        revision="23.0.1"
+        sha1="1b866047d357133341f29e26ef487eaf1bc9ccc7">
+        <dex dex="E:\MyViews\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_f8a92e2c8c423acc4283c06042b7f69b103179cf\classes.dex" />
+    </item>
+    <item
+        jar="E:\MyViews\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\jars\classes.jar"
+        jumboMode="true"
+        revision="23.0.1"
+        sha1="4486e953d1f35f8ccab098b1dd67146366d5f731">
+        <dex dex="E:\MyViews\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-22.2.1_ea32413e5f851104d5e7958e04a1ed9120250cfd\classes.dex" />
+    </item>
+    <item
+        jar="E:\MyViews\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.1\jars\libs\internal_impl-22.2.1.jar"
+        jumboMode="true"
+        revision="23.0.1"
+        sha1="c471eaaba13ff64f6e0383d1c30a9cdc9a97efeb">
+        <dex dex="E:\MyViews\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-22.2.1_93ef020c22569159d3391e00f07d0c3efc111fef\classes.dex" />
+    </item>
+    <item
+        jar="F:\sdk1\extras\android\m2repository\com\android\support\support-annotations\22.2.1\support-annotations-22.2.1.jar"
+        jumboMode="true"
+        revision="23.0.1"
+        sha1="61a0ff5c29295ec56d7e0bd3d25d95dbf71b4b2b">
+        <dex dex="E:\MyViews\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-22.2.1_dcadd02c99ed0060dbcb5aad85ecdfbab57660e0\classes.dex" />
+    </item>
+    <item
+        jar="E:\MyViews\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.1\jars\classes.jar"
+        jumboMode="true"
+        revision="23.0.1"
+        sha1="f8efd0096475e0daf054267b61544e10dc776503">
+        <dex dex="E:\MyViews\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-22.2.1_0df26a0484265e647f73f1b0a181e58b54272f3b\classes.dex" />
+    </item>
+    <item
+        jar="E:\MyViews\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        revision="23.0.1"
+        sha1="23cbb3c97ac9490f3c047d7d17fd8e7b8ee5c4fa">
+        <dex dex="E:\MyViews\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_9903fd6a580b630b75230f099d82b11324c8088e\classes.dex" />
+    </item>
+
+</items>
