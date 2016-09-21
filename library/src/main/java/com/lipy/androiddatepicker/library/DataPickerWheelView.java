@@ -1,4 +1,4 @@
-package com.lipy.datepaker;
+package com.lipy.androiddatepicker.library;
 
 import android.app.Activity;
 import android.content.Context;
@@ -22,7 +22,7 @@ import java.util.List;
 
 
 /**
- * 原版地址https://github.com/wangjiegulu/WheelView
+ * original site: https://github.com/wangjiegulu/WheelView
  * Created by lipy on 2016/07/18
  */
 public class DataPickerWheelView extends ScrollView {

@@ -55,12 +55,12 @@
                 android:layout_below="@id/wheelview_dialog_rl"
                 android:gravity="center">
 
-            <com.lipy.datepaker.DatePicker
+            <com.lipy.androiddatepicker.library.DatePicker
                     android:layout_width="match_parent"
                     android:id="@+id/wheel_view_wv"
                     android:layout_height="200dp">
 
-            </com.lipy.datepaker.DatePicker>
+            </com.lipy.androiddatepicker.library.DatePicker>
         </LinearLayout>
     </RelativeLayout>
 </RelativeLayout>

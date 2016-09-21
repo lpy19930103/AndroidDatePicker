@@ -1,4 +1,4 @@
-package com.lipy.datepaker;
+package com.lipy.androiddatepicker.library;
 
 import android.content.Context;
 import android.util.AttributeSet;
