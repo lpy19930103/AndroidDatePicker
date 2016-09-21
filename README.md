@@ -2,7 +2,7 @@
 
 ##Usage
 ---
-  > compile 'com.github.lpy19930103:AndroidDatePicker:5d17ef4c2c'
+`compile 'com.github.lpy19930103:AndroidDatePicker:5d17ef4c2c'`
 ***
 
 > setSelectedItem(int year, int month, int day)选择默认展示的年月日
