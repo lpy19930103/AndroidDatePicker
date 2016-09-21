@@ -9,6 +9,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -138,7 +139,7 @@ public class DataPickerWheelView extends ScrollView {
     }
 
     private void initData() {
-        displayItemCount = offset * 2 + 1;
+        displayItemCount = getOffset() * 2 + 1;
 
         // 添加此句才可以支持联动效果
         views.removeAllViews();
@@ -148,7 +149,7 @@ public class DataPickerWheelView extends ScrollView {
         }
 
         // 焦点文字颜色高亮位置，逆推“int position = y / itemHeight + offset”
-        refreshItemView(itemHeight * (selectedIndex - offset));
+        refreshItemView(itemHeight * (selectedIndex - getOffset()));
     }
 
     private TextView createView(String item) {
@@ -157,7 +158,7 @@ public class DataPickerWheelView extends ScrollView {
         tv.setSingleLine(true);
         tv.setEllipsize(TextUtils.TruncateAt.END);
         tv.setText(item);
-        tv.setTextSize(textSize);
+        tv.setTextSize(getTextSize());
         tv.setGravity(Gravity.CENTER);
         int padding = dip2px(8);
         tv.setPadding(padding, padding, padding, padding);
@@ -175,15 +176,15 @@ public class DataPickerWheelView extends ScrollView {
      * 刷新textview状态
      */
     private void refreshItemView(int y) {
-        int position = y / itemHeight + offset;
+        int position = y / itemHeight + getOffset();
         int remainder = y % itemHeight;//余数
         int divided = y / itemHeight;
 
         if (remainder == 0) {
-            position = divided + offset;
+            position = divided + getOffset();
         } else {
             if (remainder > itemHeight / 2) {
-                position = divided + offset + 1;
+                position = divided + getOffset() + 1;
             }
         }
 
@@ -195,9 +196,9 @@ public class DataPickerWheelView extends ScrollView {
             }
             // 2015/12/15 可设置颜色
             if (position == i) {
-                itemView.setTextColor(textColorFocus);
+                itemView.setTextColor(getFocusTextColor());
             } else {
-                itemView.setTextColor(textColorNormal);
+                itemView.setTextColor(getNormalTextColor());
             }
         }
     }
@@ -208,8 +209,8 @@ public class DataPickerWheelView extends ScrollView {
     private int[] obtainSelectedAreaBorder() {
         if (null == selectedAreaBorder) {
             selectedAreaBorder = new int[2];
-            selectedAreaBorder[0] = itemHeight * offset;
-            selectedAreaBorder[1] = itemHeight * (offset + 1);
+            selectedAreaBorder[0] = itemHeight * getOffset();
+            selectedAreaBorder[1] = itemHeight * (getOffset() + 1);
         }
         return selectedAreaBorder;
     }
@@ -220,7 +221,7 @@ public class DataPickerWheelView extends ScrollView {
     private void onSelectedCallBack() {
         if (null != onWheelViewListener) {
             //  真实的index应该忽略偏移量
-            onWheelViewListener.onSelected(isUserScroll, selectedIndex - offset, items.get(selectedIndex));
+            onWheelViewListener.onSelected(isUserScroll, selectedIndex - getOffset(), items.get(selectedIndex));
         }
     }
 
@@ -249,13 +250,13 @@ public class DataPickerWheelView extends ScrollView {
         }
 
         // 2015/12/22 可设置分隔线是否可见
-        if (!lineVisible) {
+        if (!isLineVisible()) {
             return;
         }
 
         if (null == paint) {
             paint = new Paint();
-            paint.setColor(lineColor);
+            paint.setColor(getLineColor());
             paint.setStrokeWidth(dip2px(1f));
         }
 
@@ -313,10 +314,10 @@ public class DataPickerWheelView extends ScrollView {
                 break;
             case MotionEvent.ACTION_UP:
                 float delta = ev.getY() - previousY;
-                if (selectedIndex == offset && delta > 0) {
+                if (selectedIndex == getOffset() && delta > 0) {
                     //滑动到第一项时，若继续向上滑动，则自动跳到最后一项
-                    setSelectedIndex(items.size() - offset * 2 - 1);
-                } else if (selectedIndex == items.size() - offset - 1 && delta < 0) {
+                    setSelectedIndex(items.size() - getOffset() * 2 - 1);
+                } else if (selectedIndex == items.size() - getOffset() - 1 && delta < 0) {
                     //滑动到最后一项时，若继续向下滑动，则自动跳到第一项
                     setSelectedIndex(0);
                 } else {
@@ -333,7 +334,7 @@ public class DataPickerWheelView extends ScrollView {
         items.addAll(list);
 
         // 前面和后面补全
-        for (int i = 0; i < offset; i++) {
+        for (int i = 0; i < getOffset(); i++) {
             items.add(0, "");
             items.add("");
         }
@@ -391,6 +392,7 @@ public class DataPickerWheelView extends ScrollView {
      */
     public void setTextSize(int textSize) {
         this.textSize = textSize;
+        itemHeight = 0;
     }
 
     /**
@@ -398,9 +400,14 @@ public class DataPickerWheelView extends ScrollView {
      *
      * @return the text color
      */
-    public int getTextColor() {
+    public int getFocusTextColor() {
         return textColorFocus;
     }
+
+    public int getNormalTextColor() {
+        return textColorNormal;
+    }
+
 
     /**
      * Sets text color.
@@ -477,6 +484,7 @@ public class DataPickerWheelView extends ScrollView {
             throw new IllegalArgumentException("Offset must between 1 and 4");
         }
         this.offset = offset;
+        itemHeight = 0;
     }
 
     /**
@@ -490,7 +498,7 @@ public class DataPickerWheelView extends ScrollView {
                 //滚动到选中项的位置
                 smoothScrollTo(0, index * itemHeight);
                 //选中这一项的值
-                selectedIndex = index + offset;
+                selectedIndex = index + getOffset();
                 onSelectedCallBack();
             }
         });
@@ -505,7 +513,7 @@ public class DataPickerWheelView extends ScrollView {
         for (int i = 0; i < items.size(); i++) {
             if (items.get(i).equals(item)) {
                 //调用_setItems(List)时额外添加了offset个占位符到items里，需要忽略占位符所占的位
-                setSelectedIndex(i - offset);
+                setSelectedIndex(i - getOffset());
                 break;
             }
         }
@@ -542,7 +550,7 @@ public class DataPickerWheelView extends ScrollView {
      * @return the selected index
      */
     public int getSelectedIndex() {
-        return selectedIndex - offset;
+        return selectedIndex - getOffset();
     }
 
     /**
@@ -585,7 +593,7 @@ public class DataPickerWheelView extends ScrollView {
                 final int remainder = initialY % itemHeight;
                 final int divided = initialY / itemHeight;
                 if (remainder == 0) {
-                    selectedIndex = divided + offset;
+                    selectedIndex = divided + getOffset();
                     onSelectedCallBack();
                 } else {
                     if (remainder > itemHeight / 2) {
@@ -593,7 +601,7 @@ public class DataPickerWheelView extends ScrollView {
                             @Override
                             public void run() {
                                 smoothScrollTo(0, initialY - remainder + itemHeight);
-                                selectedIndex = divided + offset + 1;
+                                selectedIndex = divided + getOffset() + 1;
                                 onSelectedCallBack();
                             }
                         });
@@ -602,7 +610,7 @@ public class DataPickerWheelView extends ScrollView {
                             @Override
                             public void run() {
                                 smoothScrollTo(0, initialY - remainder);
-                                selectedIndex = divided + offset;
+                                selectedIndex = divided + getOffset();
                                 onSelectedCallBack();
                             }
                         });

@@ -2,6 +2,7 @@ package com.lipy.datepaker;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.View;
 
 import com.lipy.androiddatepicker.library.DatePicker;
@@ -46,6 +47,7 @@ public class DatePickerDialog extends Dialog implements View.OnClickListener {
             String[] split = date.split("-");
             int i = Integer.parseInt(split[0]);
             datePicker.setRange(2000, i + 20);
+
             datePicker.setSelectedItem(Integer.parseInt(split[0]),
                     Integer.parseInt(split[1]), Integer.parseInt(split[2]));
         } catch (Exception e) {
@@ -56,6 +58,7 @@ public class DatePickerDialog extends Dialog implements View.OnClickListener {
 
     /**
      * 设置弹出后展示的年月日,必须填写当前时间往后推20年的数字
+     *
      * @param year
      * @param mouth
      * @param day

@@ -58,7 +58,7 @@
             <com.lipy.androiddatepicker.library.DatePicker
                     android:layout_width="match_parent"
                     android:id="@+id/wheel_view_wv"
-                    android:layout_height="200dp">
+                    android:layout_height="wrap_content">
 
             </com.lipy.androiddatepicker.library.DatePicker>
         </LinearLayout>

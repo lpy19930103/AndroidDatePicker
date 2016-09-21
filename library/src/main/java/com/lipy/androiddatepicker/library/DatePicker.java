@@ -24,13 +24,21 @@ public class DatePicker extends LinearLayout {
     public static final int WRAP_CONTENT = ViewGroup.LayoutParams.WRAP_CONTENT;
 
     private ArrayList<String> years = new ArrayList<>();
+
     private ArrayList<String> months = new ArrayList<>();
+
     private ArrayList<String> days = new ArrayList<>();
+
     private OnPickListener onDatePickListener;
+
     private String yearLabel = "年", monthLabel = "月", dayLabel = "日";
+
     private int selectedYearIndex = 0, selectedMonthIndex = 0, selectedDayIndex = 0;
+
     private DataPickerWheelView mYearView;
+
     private DataPickerWheelView mDayView;
+
     private DataPickerWheelView mMonthView;
 
     public DatePicker(Context context) {
@@ -180,6 +188,94 @@ public class DatePicker extends LinearLayout {
         onSubmit();
     }
 
+    /**
+     * 设置字体大小
+     *
+     * @param size
+     */
+    public void setTextSize(int size) {
+        if (mYearView != null) {
+            mYearView.setTextSize(size);
+        }
+        if (mMonthView != null) {
+            mMonthView.setTextSize(size);
+        }
+        if (mDayView != null) {
+            mDayView.setTextSize(size);
+        }
+    }
+
+    /**
+     * 设置选中的和未选中的文字颜色
+     *
+     * @param normalColor
+     * @param focusColor
+     */
+    public void setTextColor(int normalColor, int focusColor) {
+        if (mYearView != null) {
+            mYearView.setTextColor(normalColor, focusColor);
+        }
+        if (mMonthView != null) {
+            mMonthView.setTextColor(normalColor, focusColor);
+        }
+        if (mDayView != null) {
+            mDayView.setTextColor(normalColor, focusColor);
+        }
+    }
+
+    /**
+     * 是否显示分割线
+     *
+     * @param visible
+     */
+    public void setLineVisible(boolean visible) {
+        if (mYearView != null) {
+            mYearView.setLineVisible(visible);
+        }
+        if (mMonthView != null) {
+            mMonthView.setLineVisible(visible);
+        }
+        if (mDayView != null) {
+            mDayView.setLineVisible(visible);
+        }
+    }
+
+    /**
+     * 分割线颜色
+     *
+     * @param color
+     */
+    public void setLineColor(int color) {
+        if (mYearView != null) {
+            mYearView.setLineColor(color);
+        }
+        if (mMonthView != null) {
+            mMonthView.setLineColor(color);
+        }
+        if (mDayView != null) {
+            mDayView.setLineColor(color);
+        }
+    }
+
+    /**
+     * 上下偏移条目数
+     *
+     * @param offset
+     */
+    public void setOffset(int offset) {
+        if (mYearView != null) {
+            mYearView.setOffset(offset);
+        }
+        if (mMonthView != null) {
+            mMonthView.setOffset(offset);
+        }
+        if (mDayView != null) {
+            mDayView.setOffset(offset);
+        }
+        invalidate();
+    }
+
+
     protected View makeCenterView() {
         LinearLayout layout = new LinearLayout(mContext);
         layout.setOrientation(LinearLayout.HORIZONTAL);
@@ -187,13 +283,17 @@ public class DatePicker extends LinearLayout {
         layout.setGravity(Gravity.CENTER);
         mYearView = new DataPickerWheelView(mContext);
         mYearView.setLayoutParams(new LayoutParams(dp2px(mContext, 120), WRAP_CONTENT));
+        mYearView = new DataPickerWheelView(mContext);
+        mYearView.setLayoutParams(new LayoutParams(dp2px(mContext, 120), WRAP_CONTENT));
         layout.addView(mYearView);
 
         mMonthView = new DataPickerWheelView(mContext);
         mMonthView.setLayoutParams(new LayoutParams(dp2px(mContext, 120), WRAP_CONTENT));
+        mMonthView.setLayoutParams(new LayoutParams(dp2px(mContext, 120), WRAP_CONTENT));
         layout.addView(mMonthView);
 
         mDayView = new DataPickerWheelView(mContext);
+        mDayView.setLayoutParams(new LayoutParams(dp2px(mContext, 120), WRAP_CONTENT));
         mDayView.setLayoutParams(new LayoutParams(dp2px(mContext, 120), WRAP_CONTENT));
         layout.addView(mDayView);
 
